@@ -1,0 +1,19 @@
+package com.example.dao;
+
+import com.example.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+/**
+ * @author Adopat
+ * @description TODO
+ * @date 2023-07-22 11:42
+ */
+@Repository
+public interface UserDao extends JpaRepository<User,Long> {
+    @Query(value = "select * from user where name like %?1%",nativeQuery = true)
+    Page<User> findNameLike(String name, PageRequest pageRequest);
+}
